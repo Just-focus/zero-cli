@@ -1,12 +1,13 @@
 // 创建
 const path = require('path');
+const chalk = require('chalk');
 import downloadTpl from './download';
 import readFiles from '../utils/readFiles';
 import writeFileTree from '../utils/writeFileTree';
 import generatePkg from '../utils/generate';
 import { removeDicts } from '../utils/removeFile';
 
-const downloadPkg = 'downloadPkg';
+const downloadPkg = 'midStation';
 const readDir = `${downloadPkg}/packages/react-webpack`;
 
 // 下载 -> 读取文件 -> 写入当前磁盘 | 修改package.json | 写入自定义config -> 删除文件
@@ -26,14 +27,13 @@ const creator = async (name: string) => {
  
     // 删除之前文件
     const removeDir = path.resolve(process.cwd(), downloadPkg);
-    const removed = await removeDicts(removeDir);
-    if(removed) {
-      console.log('删除文件夹成功');
-    }else {
-      console.log('删除文件失败');
-    }
+    await removeDicts(removeDir);
+
+    // 生成 git init
+    const shouldInitGit = false;
+
   }else {
-    console.log('download fail')
+    console.error(chalk.red('network err, pls wait a moment'))
   }
 }
 

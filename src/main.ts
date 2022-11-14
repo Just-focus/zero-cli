@@ -21,6 +21,7 @@ commander
 commander
   .command('create <project>')
   .description('Create your own project. For example: zero-cli create demo')
+  .option('-f, --force', 'Overwrite target directory if it exists')
   .action((...args: any) => exec('create', ...args));
 
 commander
